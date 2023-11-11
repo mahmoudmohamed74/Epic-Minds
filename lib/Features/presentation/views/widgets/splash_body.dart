@@ -1,10 +1,96 @@
+import 'package:epic_minds/core/utils/assets.dart';
 import 'package:flutter/material.dart';
 
-class SplashBody extends StatelessWidget {
+class SplashBody extends StatefulWidget {
   const SplashBody({super.key});
 
   @override
+  State<SplashBody> createState() => _SplashBodyState();
+}
+
+class _SplashBodyState extends State<SplashBody>
+    with SingleTickerProviderStateMixin {
+  late AnimationController _animationController;
+  late Animation<Offset> _slidingAnimation;
+
+  @override
+  void initState() {
+    super.initState();
+    _animationController = AnimationController(
+      vsync: this,
+      duration: const Duration(
+        seconds: 1,
+      ),
+    );
+    _slidingAnimation =
+        Tween<Offset>(begin: const Offset(0, 2.5), end: Offset.zero)
+            .animate(_animationController);
+    _animationController.forward();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _animationController.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return Column();
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              const Padding(
+                padding: EdgeInsets.only(right: 10),
+                child: Text(
+                  "Epic Minds",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+                ),
+              ),
+              Image.asset(
+                AssetsData.logo,
+                color: Colors.white,
+              ),
+            ],
+          ),
+          SlidingText(slidingAnimation: _slidingAnimation),
+        ],
+      ),
+    );
+  }
+}
+
+class SlidingText extends StatelessWidget {
+  const SlidingText({
+    Key? key,
+    required Animation<Offset> slidingAnimation,
+  })  : _slidingAnimation = slidingAnimation,
+        super(key: key);
+
+  final Animation<Offset> _slidingAnimation;
+
+  @override
+  Widget build(BuildContext context) {
+    return AnimatedBuilder(
+      animation: _slidingAnimation,
+      builder: (context, child) {
+        return SlideTransition(
+          position: _slidingAnimation,
+          child: const Padding(
+            padding: EdgeInsets.only(top: 10),
+            child: Text(
+              "Free Books at Your Fingertips",
+              textAlign: TextAlign.center,
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            ),
+          ),
+        );
+      },
+    );
   }
 }
