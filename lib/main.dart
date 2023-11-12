@@ -1,4 +1,4 @@
-import 'package:epic_minds/Features/presentation/views/SplashScreen.dart';
+import 'package:epic_minds/Features/splash/presentation/views/SplashScreen.dart';
 import 'package:epic_minds/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

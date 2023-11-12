@@ -1,5 +1,8 @@
+import 'package:epic_minds/Features/home/presentation/views/home_view.dart';
+import 'package:epic_minds/constants.dart';
 import 'package:epic_minds/core/utils/assets.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class SplashBody extends StatefulWidget {
   const SplashBody({super.key});
@@ -16,16 +19,8 @@ class _SplashBodyState extends State<SplashBody>
   @override
   void initState() {
     super.initState();
-    _animationController = AnimationController(
-      vsync: this,
-      duration: const Duration(
-        seconds: 1,
-      ),
-    );
-    _slidingAnimation =
-        Tween<Offset>(begin: const Offset(0, 2.5), end: Offset.zero)
-            .animate(_animationController);
-    _animationController.forward();
+    initSlidingAnimation();
+    navigateToHome();
   }
 
   @override
@@ -61,6 +56,32 @@ class _SplashBodyState extends State<SplashBody>
           SlidingText(slidingAnimation: _slidingAnimation),
         ],
       ),
+    );
+  }
+
+  void initSlidingAnimation() {
+    _animationController = AnimationController(
+      vsync: this,
+      duration: const Duration(
+        seconds: 1,
+      ),
+    );
+    _slidingAnimation =
+        Tween<Offset>(begin: const Offset(0, 2.5), end: Offset.zero)
+            .animate(_animationController);
+    _animationController.forward();
+  }
+
+  void navigateToHome() {
+    Future.delayed(
+      const Duration(seconds: 2),
+      () {
+        Get.to(
+          HomeView(),
+          transition: Transition.fade,
+          duration: kTransitionDuration,
+        );
+      },
     );
   }
 }
