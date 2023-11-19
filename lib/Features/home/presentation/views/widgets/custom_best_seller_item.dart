@@ -1,3 +1,4 @@
+import 'package:epic_minds/Features/home/presentation/views/widgets/book_rating.dart';
 import 'package:epic_minds/constants.dart';
 import 'package:epic_minds/core/utils/app_router.dart';
 import 'package:epic_minds/core/utils/assets.dart';
@@ -70,33 +71,13 @@ class CustomBestSellerItem extends StatelessWidget {
                         height: 3,
                       ),
                       Row(
-                        children: [
-                          const Text(
+                        children: const [
+                          Text(
                             "19.99 #",
                             style: Styles.titleStyle20,
                           ),
-                          const Spacer(),
-                          const Icon(
-                            FontAwesomeIcons.solidStar,
-                            size: 15,
-                            color: Color(0xffFFDD4F),
-                          ),
-                          const SizedBox(
-                            width: 6.3,
-                          ),
-                          const Text(
-                            "4.8",
-                            style: Styles.titleStyle16,
-                          ),
-                          const SizedBox(
-                            width: 5,
-                          ),
-                          Text(
-                            "(255)",
-                            style: Styles.titleStyle14.copyWith(
-                              color: const Color(0xff707070),
-                            ),
-                          ),
+                          Spacer(),
+                          BookRating(),
                         ],
                       )
                     ],
