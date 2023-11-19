@@ -1,8 +1,7 @@
-import 'package:epic_minds/Features/home/presentation/views/home_view.dart';
-import 'package:epic_minds/constants.dart';
+import 'package:epic_minds/core/utils/app_router.dart';
 import 'package:epic_minds/core/utils/assets.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:go_router/go_router.dart';
 
 class SplashBody extends StatefulWidget {
   const SplashBody({super.key});
@@ -76,11 +75,12 @@ class _SplashBodyState extends State<SplashBody>
     Future.delayed(
       const Duration(seconds: 2),
       () {
-        Get.to(
-          HomeView(),
-          transition: Transition.fade,
-          duration: kTransitionDuration,
-        );
+        // Get.to(
+        //   HomeView(),
+        //   transition: Transition.fade,
+        //   duration: kTransitionDuration,
+        // );
+        GoRouter.of(context).push(AppRouter.kHomeView);
       },
     );
   }
