@@ -8,19 +8,17 @@ class CustomBooksListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(left: 10),
-      child: SizedBox(
-        height: MediaQuery.of(context).size.height * .3,
-        child: ListView.builder(
-          scrollDirection: Axis.horizontal,
-          itemBuilder: (BuildContext context, int index) {
-            return const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 8.0),
-              child: CustomListViewItem(),
-            );
-          },
-        ),
+    return SizedBox(
+      height: MediaQuery.of(context).size.height * .3,
+      child: ListView.builder(
+        padding: EdgeInsets.zero,
+        scrollDirection: Axis.horizontal,
+        itemBuilder: (BuildContext context, int index) {
+          return const Padding(
+            padding: EdgeInsets.only(right: 15),
+            child: CustomListViewItem(),
+          );
+        },
       ),
     );
   }
