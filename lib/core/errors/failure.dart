@@ -2,15 +2,15 @@ import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
 
 abstract class Failure extends Equatable {
-  final String message;
+  final String errorMessage;
 
-  const Failure(this.message);
+  const Failure(this.errorMessage);
   @override
-  List<Object?> get props => [message];
+  List<Object?> get props => [errorMessage];
 }
 
 class ServerFailure extends Failure {
-  const ServerFailure(super.message);
+  const ServerFailure(super.errorMessage);
   factory ServerFailure.fromDioError(DioException dioError) {
     switch (dioError.type) {
       case DioExceptionType.connectionTimeout:
@@ -56,5 +56,5 @@ class ServerFailure extends Failure {
 }
 
 class LocalDataDataBaseFailure extends Failure {
-  const LocalDataDataBaseFailure(super.message);
+  const LocalDataDataBaseFailure(super.errorMessage);
 }
