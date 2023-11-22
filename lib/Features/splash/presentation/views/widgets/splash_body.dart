@@ -1,10 +1,23 @@
+import 'package:dio/dio.dart';
+import 'package:epic_minds/Features/home/data/repos/home_repo.dart';
+import 'package:epic_minds/Features/home/data/repos/home_repo_impl.dart';
+import 'package:epic_minds/core/utils/api_service.dart';
 import 'package:epic_minds/core/utils/app_router.dart';
 import 'package:epic_minds/core/utils/assets.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
+final ApiService apiService = ApiService(Dio());
+final HomeRepo homeRepoImpl = HomeRepoImpl(apiService);
+void getDATA() {
+  print("hellllllllllllllll");
+  homeRepoImpl.fetchBestSellerBooks();
+}
+
 class SplashBody extends StatefulWidget {
-  const SplashBody({super.key});
+  SplashBody({
+    super.key,
+  });
 
   @override
   State<SplashBody> createState() => _SplashBodyState();
@@ -19,7 +32,8 @@ class _SplashBodyState extends State<SplashBody>
   void initState() {
     super.initState();
     initSlidingAnimation();
-    navigateToHome();
+    getDATA();
+    // navigateToHome();
   }
 
   @override
