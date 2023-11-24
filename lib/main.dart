@@ -1,6 +1,7 @@
 import 'package:epic_minds/Features/home/data/repos/home_repo_impl.dart';
 import 'package:epic_minds/Features/home/presentation/controller/best_seller_cubit/best_seller_cubit.dart';
 import 'package:epic_minds/Features/home/presentation/controller/featured_books_cubit/featured_books_cubit.dart';
+import 'package:epic_minds/bloc_observer.dart';
 import 'package:epic_minds/constants.dart';
 import 'package:epic_minds/core/utils/app_router.dart';
 import 'package:epic_minds/core/utils/service_locator.dart';
@@ -9,8 +10,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   setupServiceLocator();
-  runApp(const MyApp());
+  BlocOverrides.runZoned(
+    () {
+      runApp(const MyApp());
+    },
+    blocObserver: MyBlocObserver(),
+  );
 }
 
 class MyApp extends StatelessWidget {

@@ -3,6 +3,8 @@ import 'package:epic_minds/Features/home/data/repos/home_repo_impl.dart';
 import 'package:epic_minds/Features/home/presentation/controller/similar_books/similar_books_cubit.dart';
 import 'package:epic_minds/Features/home/presentation/views/books_details_view.dart';
 import 'package:epic_minds/Features/home/presentation/views/home_view.dart';
+import 'package:epic_minds/Features/search/data/repos/search_repo_impl.dart';
+import 'package:epic_minds/Features/search/presentation/controllers/cubit/search_cubit.dart';
 import 'package:epic_minds/Features/search/presentation/views/search_view.dart';
 import 'package:epic_minds/Features/splash/presentation/views/splash_screen.dart';
 import 'package:epic_minds/core/utils/service_locator.dart';
@@ -31,7 +33,10 @@ abstract class AppRouter {
       GoRoute(
         path: kSearchView,
         builder: (BuildContext context, GoRouterState state) {
-          return const SearchView();
+          return BlocProvider(
+            create: (context) => SearchCubit(sl.get<SearchRepoImpl>()),
+            child: const SearchView(),
+          );
         },
       ),
       GoRoute(

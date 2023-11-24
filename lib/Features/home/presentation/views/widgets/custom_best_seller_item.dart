@@ -24,7 +24,7 @@ class CustomBestSellerItem extends StatelessWidget {
         );
       },
       child: SizedBox(
-        height: 120,
+        height: 122,
         child: Row(
           children: [
             CustomBookImage(
@@ -53,7 +53,7 @@ class CustomBestSellerItem extends StatelessWidget {
                       height: 3,
                     ),
                     Text(
-                      bookModel.volumeInfo.authors![0],
+                      bookModel.volumeInfo.authors?[0] ?? "",
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       style: Styles.titleStyle14,
