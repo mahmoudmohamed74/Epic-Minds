@@ -1,9 +1,11 @@
 import 'package:epic_minds/Features/home/presentation/controller/featured_books_cubit/featured_books_cubit.dart';
 import 'package:epic_minds/Features/home/presentation/views/widgets/custom_book_item.dart';
+import 'package:epic_minds/core/utils/app_router.dart';
 import 'package:epic_minds/core/widgets/custom_error_widget.dart';
 import 'package:epic_minds/core/widgets/custom_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
 class CustomBooksListView extends StatelessWidget {
   const CustomBooksListView({
@@ -27,10 +29,18 @@ class CustomBooksListView extends StatelessWidget {
                   padding: const EdgeInsets.only(right: 15),
                   child: SizedBox(
                     height: MediaQuery.of(context).size.height * .3,
-                    child: CustomBookImage(
-                      imageUrl: state.booksList[index].volumeInfo.imageLinks
-                              ?.thumbnail ??
-                          "",
+                    child: GestureDetector(
+                      onTap: () {
+                        GoRouter.of(context).push(
+                          AppRouter.kBookDetailsView,
+                          extra: state.booksList[index],
+                        );
+                      },
+                      child: CustomBookImage(
+                        imageUrl: state.booksList[index].volumeInfo.imageLinks
+                                ?.thumbnail ??
+                            "",
+                      ),
                     ),
                   ),
                 );
