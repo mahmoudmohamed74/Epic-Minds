@@ -1,4 +1,5 @@
 import 'package:epic_minds/Features/home/data/models/book_model/book_model.dart';
+import 'package:epic_minds/core/utils/functions/launcher_url.dart';
 import 'package:epic_minds/core/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -30,14 +31,14 @@ class BooksActions extends StatelessWidget {
           Expanded(
             child: CustomButton(
               onPressed: () async {
-                Uri uri = Uri.parse(bookModel.volumeInfo.previewLink!);
-                if (await canLaunchUrl(uri)) {
-                  await launchUrl(uri);
-                }
+                launchCustomFunction(
+                  context,
+                  bookModel.volumeInfo.previewLink,
+                );
               },
               backGroundColor: const Color(0xffEF8262),
               textColor: Colors.white,
-              buttonText: "Free Preview",
+              buttonText: getText(bookModel),
               borderRadius: const BorderRadius.only(
                 topRight: Radius.circular(12),
                 bottomRight: Radius.circular(12),
@@ -47,5 +48,13 @@ class BooksActions extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  String getText(BookModel bookModel) {
+    if (bookModel.volumeInfo.previewLink == null) {
+      return "Not Available";
+    } else {
+      return "Preview";
+    }
   }
 }
