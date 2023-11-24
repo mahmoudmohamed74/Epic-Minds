@@ -1,91 +1,83 @@
+import 'package:epic_minds/Features/home/data/models/book_model/book_model.dart';
 import 'package:epic_minds/Features/home/presentation/views/widgets/book_rating.dart';
+import 'package:epic_minds/Features/home/presentation/views/widgets/custom_book_item.dart';
 import 'package:epic_minds/constants.dart';
 import 'package:epic_minds/core/utils/app_router.dart';
-import 'package:epic_minds/core/utils/assets.dart';
 import 'package:epic_minds/core/utils/styles.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
 
 class CustomBestSellerItem extends StatelessWidget {
+  final BookModel bookModel;
   const CustomBestSellerItem({
     Key? key,
+    required this.bookModel,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 10),
-      child: GestureDetector(
-        onTap: () {
-          GoRouter.of(context).push(AppRouter.kBookDetailsView);
-        },
-        child: SizedBox(
-          height: 135,
-          child: Row(
-            children: [
-              AspectRatio(
-                aspectRatio: 2.5 / 4,
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: Colors.amber,
-                    borderRadius: BorderRadius.circular(8),
-                    image: const DecorationImage(
-                      fit: BoxFit.fill,
-                      image: AssetImage(
-                        AssetsData.cover,
+    return GestureDetector(
+      onTap: () {
+        GoRouter.of(context).push(AppRouter.kBookDetailsView);
+      },
+      child: SizedBox(
+        height: 120,
+        child: Row(
+          children: [
+            CustomBookImage(
+              imageUrl: bookModel.volumeInfo.imageLinks?.thumbnail ?? "",
+            ),
+            const SizedBox(
+              width: 30,
+            ),
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.only(right: 24.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    SizedBox(
+                      width: MediaQuery.of(context).size.width * .5,
+                      child: Text(
+                        bookModel.volumeInfo.title!,
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                        style: Styles.titleStyle20
+                            .copyWith(fontFamily: kGtSectraFine),
                       ),
                     ),
-                  ),
-                ),
-              ),
-              const SizedBox(
-                width: 30,
-              ),
-              Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.only(right: 24.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      SizedBox(
-                        width: MediaQuery.of(context).size.width * .5,
-                        child: Text(
-                          "Harry Potter and the Goblet of Fire",
-                          maxLines: 2,
-                          overflow: TextOverflow.ellipsis,
-                          style: Styles.titleStyle20
-                              .copyWith(fontFamily: kGtSectraFine),
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 3,
-                      ),
-                      const Text(
-                        "J.K Rowling",
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                        style: Styles.titleStyle14,
-                      ),
-                      const SizedBox(
-                        height: 3,
-                      ),
-                      Row(
-                        children: const [
-                          Text(
-                            "19.99 #",
-                            style: Styles.titleStyle20,
+                    const SizedBox(
+                      height: 3,
+                    ),
+                    Text(
+                      bookModel.volumeInfo.authors![0],
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: Styles.titleStyle14,
+                    ),
+                    const SizedBox(
+                      height: 3,
+                    ),
+                    Row(
+                      children: [
+                        Text(
+                          "Free",
+                          style: Styles.titleStyle20.copyWith(
+                            fontWeight: FontWeight.bold,
                           ),
-                          Spacer(),
-                          BookRating(),
-                        ],
-                      )
-                    ],
-                  ),
+                        ),
+                        const Spacer(),
+                        BookRating(
+                          bookRating: bookModel.volumeInfo.averageRating ?? 0,
+                          count: bookModel.volumeInfo.ratingsCount ?? 0,
+                        ),
+                      ],
+                    )
+                  ],
                 ),
-              )
-            ],
-          ),
+              ),
+            )
+          ],
         ),
       ),
     );

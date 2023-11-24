@@ -8,7 +8,8 @@ part 'best_seller_state.dart';
 class BestSellerCubit extends Cubit<BestSellerState> {
   final HomeRepo homeRepo;
   BestSellerCubit(this.homeRepo) : super(BestSellerInitialState());
-  Future<void> getFeaturedBooks() async {
+
+  Future<void> getBestSellerBooks() async {
     emit(BestSellerLoadingState());
     var result = await homeRepo.fetchBestSellerBooks();
     result.fold(

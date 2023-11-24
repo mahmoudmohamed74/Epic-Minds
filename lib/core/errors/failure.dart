@@ -35,7 +35,7 @@ class ServerFailure extends Failure {
         return const ServerFailure("Cancel Exception");
 
       case DioExceptionType.connectionError:
-        return const ServerFailure("Connection Error");
+        return const ServerFailure("No Internet Connection");
 
       case DioExceptionType.unknown:
         return const ServerFailure("unknown Exception");

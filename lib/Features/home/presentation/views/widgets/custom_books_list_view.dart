@@ -28,8 +28,9 @@ class CustomBooksListView extends StatelessWidget {
                   child: SizedBox(
                     height: MediaQuery.of(context).size.height * .3,
                     child: CustomBookImage(
-                      imageUrl: state
-                          .booksList[index].volumeInfo.imageLinks.thumbnail,
+                      imageUrl: state.booksList[index].volumeInfo.imageLinks
+                              ?.thumbnail ??
+                          "",
                     ),
                   ),
                 );
