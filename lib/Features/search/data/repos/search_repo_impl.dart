@@ -20,14 +20,19 @@ class SearchRepoImpl implements SearchRepo {
             'volumes?Filtering=free-ebooks&Sorting=relevance &q=$bookName',
       );
 
-      List<BookModel> books1 = [];
       List<SearchModel> books = [];
       for (var item in data['items']) {
-        books1.add(BookModel.fromJson(item));
+        try {
+          books.add(
+            SearchModel.fromBookModel(
+              BookModel.fromJson(item),
+            ),
+          );
+        } catch (e) {
+          print(e.toString());
+        }
       }
-      for (var book in books1) {
-        books.add(SearchModel.fromBookModel(book));
-      }
+
       return right(books);
     } on Exception catch (e) {
       if (e is DioException) {

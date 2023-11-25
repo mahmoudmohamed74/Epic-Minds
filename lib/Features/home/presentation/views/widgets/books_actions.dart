@@ -2,7 +2,6 @@ import 'package:epic_minds/Features/home/data/models/book_model/book_model.dart'
 import 'package:epic_minds/core/utils/functions/launcher_url.dart';
 import 'package:epic_minds/core/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class BooksActions extends StatelessWidget {
   final BookModel bookModel;

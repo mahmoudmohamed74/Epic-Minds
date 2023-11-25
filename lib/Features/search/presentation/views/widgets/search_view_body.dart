@@ -64,7 +64,7 @@ class SearchResultListView extends StatelessWidget {
         } else if (state is SearchInitial) {
           return const Text('no results');
         } else {
-          return CustomLoadingIndicator();
+          return const CustomLoadingIndicator();
         }
       },
     );
